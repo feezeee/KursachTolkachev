@@ -48,5 +48,12 @@ namespace KursachTolkachev.Models
         [Column("qualification_id")]
         public int QualificationId { get; set; }
         public Qualification Qualification { get; set; }
+
+
+
+
+        public virtual List<Class> Classes { get; set; } = new List<Class>();
+
+        public virtual List<Lesson> Lessons { get; set; } = new List<Lesson>();
     }
 }

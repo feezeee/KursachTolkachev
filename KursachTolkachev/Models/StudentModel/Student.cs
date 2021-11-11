@@ -6,23 +6,29 @@ using System.Threading.Tasks;
 
 namespace KursachTolkachev.Models
 {
-    public class Strudent
+    [Table("students")]
+    public class Student
     {
+        [Column("student_id")]
         public int Id { get; set; }
 
+        [Column("first_name")]
         public string FirstName { get; set; }
 
+        [Column("middle_name")]
         public string MiddleName { get; set; }
 
+        [Column("last_name")]
         public string LastName { get; set; }
+
 
         [Column("access_right_id")]
         public int AccessRightId { get; set; }
         public AccessRight AccessRight { get; set; }
 
 
-        [Column("qualification_id")]
+        [Column("class_id")]
         public int ClassId { get; set; }
-        public Class Qualification { get; set; }
+        public Class Class { get; set; }
     }
 }

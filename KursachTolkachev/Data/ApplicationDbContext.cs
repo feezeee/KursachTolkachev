@@ -16,6 +16,12 @@ namespace KursachTolkachev.Data
         public DbSet<AccessRight> AccessRights { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Qualification> Qualifications { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<ClassType> ClassTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

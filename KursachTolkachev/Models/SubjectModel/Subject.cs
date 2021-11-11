@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace KursachTolkachev.Models
 {
-    [Table("classes_type")]
-    public class ClassType
+    [Table("subjects")]
+    public class Subject
     {
-        [Column("class_type_id")]
+        [Column("subject_id")]
         public int Id { get; set; }
 
-        [Column("type_name")]
+        [Column("subject_name")]
         public string Name { get; set; }
 
-
-        public virtual List<Class> Classes { get; set; } = new List<Class>();
+        public virtual List<Lesson> Lessons { get; set; } = new List<Lesson>();
     }
 }
