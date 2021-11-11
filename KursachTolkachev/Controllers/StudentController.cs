@@ -41,9 +41,7 @@ namespace KursachTolkachev.Controllers
                 //{
                 //    list.Add(new SelectListItem { Selected= true, Text})
                 //}
-                ViewBag.Classes = new SelectList(_context.Classes.Include(t => t.ClassChar).Include(t => t.ClassType).Select(t=>t.ClassType && t.ClassChar), "Id", "Name");
-
-                ViewBag.Classes = new SelectList()
+                ViewBag.Classes = new SelectList(_context.Classes.Include(t => t.ClassChar).Include(t => t.ClassType).Select(t=>t), "Id", "ClassType.Name");
                 return View(student);
             }
             return RedirectToAction("List");
@@ -51,7 +49,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Worker worker)
+        public async Task<IActionResult> Edit(Student student)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +60,7 @@ namespace KursachTolkachev.Controllers
                 //    AuthorizedUser.GetInstance().ClearUser();
                 //    AuthorizedUser.GetInstance().SetUser(worker);
                 //}
-                _context.Entry(worker).State = EntityState.Modified;
+                _context.Entry(student).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return RedirectToAction("List");
             }
@@ -70,7 +68,7 @@ namespace KursachTolkachev.Controllers
             ViewBag.Positions = new SelectList(_context.Positions, "Id", "Name");
             ViewBag.Qualifications = new SelectList(_context.Qualifications, "Id", "Name");
             ViewBag.AccessRights = new SelectList(_context.AccessRights, "Id", "Name");
-            return View(worker);
+            return View(student);
         }
 
 
