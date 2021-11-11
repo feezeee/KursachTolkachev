@@ -1,0 +1,67 @@
+﻿@model Worker
+@{
+    Layout = "_Layout";
+
+}
+
+<div class="divForEdit">
+    <form class="FormForEdit" asp-controller="Worker" asp-action="Edit" method="post">
+        <a type="button" asp-controller="Worker" asp-action="List" class="close">X</a>
+        <h2>
+            @ViewBag.WhatEdit
+        </h2>
+        <ul class="properties">
+            <li>
+                <span>Введите фамилию работника*</span>
+                <input hidden asp-for="Id" type="text" value="@Model.Id" />
+                <input required asp-for="LastName" type="text" placeholder="Фамилия:" value="@Model.LastName" />
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Введите имя работника*</span>
+                <input required asp-for="FirstName" type="text" placeholder="Имя:" value="@Model.FirstName"/>
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Введите отчество работника*</span>
+                <input required asp-for="MiddleName" type="text" placeholder="Отчество:" value="@Model.MiddleName"/>
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Введите номер телефона работника*</span>
+                <input required asp-for="PhoneNumber" type="text" placeholder="Номер телефона:" value="@Model.PhoneNumber"/>
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Введите Email работника</span>
+                <input asp-for="Email" type="text" placeholder="Email:" value="@Model.Email"/>
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Введите пароль к сайту для работника*</span>
+                <input required asp-for="Password" type="text" placeholder="Пароль:" value="@Model.Password" />
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Выберите должность*</span>
+                <select required asp-for="PositionId" asp-items="ViewBag.Positions" value="@Model.PositionId"></select>
+            </li>
+            <li>
+                <span>Выберите квалификацию*</span>
+                <select required asp-for="QualificationId" asp-items="ViewBag.Qualifications" value="@Model.QualificationId"></select>
+            </li>
+            <li>
+                <span>Выберите права доступа к сайту*</span>
+                <select required asp-for="AccessRightId" asp-items="ViewBag.AccessRights" value="@Model.AccessRightId"></select>
+            </li>
+        </ul>
+        <div class="button_place">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <button type="reset" class="btn btn-danger">Очистить</button>
+            @if (AuthorizedUser.GetInstance().GetWorker().Id != Model.Id)
+            {
+                <a class="btn btn-danger" asp-controller="Worker" asp-action="Delete" asp-route-id=@Model.Id><div>Удалить</div></a>
+            }
+        </div> 
+    </form>
+</div>

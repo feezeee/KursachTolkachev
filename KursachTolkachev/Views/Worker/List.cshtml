@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Worker>
+@{ 
+    Layout = "_Layout";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Фамилия</th>
+                <th class="text-center">Имя</th>
+                <th class="text-center">Отчество</th>
+                <th class="text-center">Должность</th>
+                <th class="text-center">Квалификация</th>
+                <th class="text-center">Права доступа к сайту</th>
+                <th class="text-center">Номер телефона</th>
+                <th class="text-center">Email</th>
+            </tr>
+        </thead>
+        <tbody id="editWorker">
+            @foreach (var worker in Model)
+            {
+            <tr class="rowEditStart">
+                <th class="text-center editId">@worker.Id</th>
+                <td class="text-center">@worker.LastName</td>
+                <td class="text-center">@worker.FirstName</td>
+                <td class="text-center">@worker.MiddleName</td>
+                <td class="text-center">@worker.Position?.Name</td>
+                <td class="text-center">@worker.Qualification?.Name</td>
+                <td class="text-center">@worker.AccessRight?.Name</td>
+                <td class="text-center">@worker.PhoneNumber</td>
+                <td class="text-center">@worker.Email</td>
+
+            </tr>
+            }
+            
+        </tbody>
+    </table>
+</div>
+<script src="~/js/worker.js">
+
+</script>

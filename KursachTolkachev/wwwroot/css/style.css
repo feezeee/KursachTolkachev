@@ -1,0 +1,92 @@
+﻿html, body{
+    height: 100%;
+    margin:0;
+}
+
+.divForEdit{
+    height: 100%;
+    width: 100%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.FormForEdit {
+    min-height: 400px;
+    min-width: 600px;
+    background-color: #e9fffc;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.properties {
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    row-gap: 30px;
+}
+
+.properties li {
+    width: 40%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.properties li input, .properties li select {
+    border-radius: 5px;
+    border: 1px solid #808080;
+    padding: 10px;
+}
+
+.button_place {
+    margin: 0;
+    margin-top: 70px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+.button_place button{
+    min-width: 200px;
+    min-height: 50px;
+    border-radius: 10px;
+}
+
+.button_place a {
+    min-width: 200px;
+    min-height: 50px;
+    border-radius: 10px;
+}
+.button_place a div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.rowEditStart{
+    cursor: pointer;
+}
+
+.divforDelete {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.FormForDelete {
+    min-height: 200px;
+    min-width: 600px;
+    background-color: #e9fffc;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
