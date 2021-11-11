@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Student>
+@{
+    Layout = "_Layout";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Фамилия</th>
+                <th class="text-center">Имя</th>
+                <th class="text-center">Отчество</th>
+                <th class="text-center">Класс</th>
+            </tr>
+        </thead>
+        <tbody id="editStudent">
+            @foreach (var student in Model)
+            {
+                <tr class="rowEditStart">
+                    <th class="text-center editId">@student.Id</th>
+                    <td class="text-center">@student.LastName</td>
+                    <td class="text-center">@student.FirstName</td>
+                    <td class="text-center">@student.MiddleName</td>
+                    <td class="text-center">@student.Class?.ClassType?.Name (@student.Class?.ClassChar?.CharName)</td>
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<script src="~/js/student.js">
+
+</script>

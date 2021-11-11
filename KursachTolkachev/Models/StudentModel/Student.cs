@@ -22,11 +22,6 @@ namespace KursachTolkachev.Models
         public string LastName { get; set; }
 
 
-        [Column("access_right_id")]
-        public int AccessRightId { get; set; }
-        public AccessRight AccessRight { get; set; }
-
-
         [Column("class_id")]
         public int ClassId { get; set; }
         public Class Class { get; set; }

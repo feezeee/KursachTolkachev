@@ -8,7 +8,8 @@ namespace KursachTolkachev.Models
 {
     [Table("workers")]
     public class Worker
-    {
+    {       
+
         [Column("worker_id")]
         public int Id { get; set; }
 
@@ -54,6 +55,6 @@ namespace KursachTolkachev.Models
 
         public virtual List<Class> Classes { get; set; } = new List<Class>();
 
-        public virtual List<Lesson> Lessons { get; set; } = new List<Lesson>();
+        public virtual List<Subject> Lessons { get; set; } = new List<Subject>();
     }
 }

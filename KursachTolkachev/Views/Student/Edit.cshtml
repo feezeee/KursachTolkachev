@@ -1,0 +1,46 @@
+﻿@model Student
+@{
+    Layout = "_Layout";
+
+}
+
+<div class="divForEdit">
+    <form class="FormForEdit" asp-controller="Student" asp-action="Edit" method="post">
+        <a type="button" asp-controller="Student" asp-action="List" class="close">X</a>
+        <h2>
+            Редактирование 
+        </h2>
+        <ul class="properties">
+            <li>
+                <span>Введите фамилию работника*</span>
+                <input hidden asp-for="Id" type="text" value="@Model.Id" />
+                <input required asp-for="LastName" type="text" placeholder="Фамилия:" value="@Model.LastName" />
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Введите имя работника*</span>
+                <input required asp-for="FirstName" type="text" placeholder="Имя:" value="@Model.FirstName" />
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Введите отчество работника*</span>
+                <input required asp-for="MiddleName" type="text" placeholder="Отчество:" value="@Model.MiddleName" />
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Выберите класс*</span>
+                <select required asp-for="ClassId" asp-items="ViewBag.Classes" value="@Model.ClassId"></select>
+            </li>            
+            @*<li>
+                <span>Выберите права доступа к сайту*</span>
+                <select required asp-for="ClassId" asp-items="ViewBag.Classes" value="@Model.ClassId"></select>
+            </li>*@
+
+        </ul>
+        <div class="button_place">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <button type="reset" class="btn btn-danger">Очистить</button>
+            <a class="btn btn-danger" asp-controller="Student" asp-action="Delete" asp-route-id=@Model.Id><div>Удалить</div></a>
+        </div>
+    </form>
+</div>

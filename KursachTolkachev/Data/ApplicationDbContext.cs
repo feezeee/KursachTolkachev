@@ -19,31 +19,30 @@ namespace KursachTolkachev.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
-        public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<ClassType> ClassTypes { get; set; }
         public DbSet<ClassChar> ClassChars { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder
-            //   .Entity<Provider>()
-            //   .HasMany(c => c.GoodsForSale)
-            //   .WithMany(s => s.Providers)
-            //   .UsingEntity<GoodForSale_Provider>(
-            //      j => j
-            //       .HasOne(pt => pt.GoodForSale)
-            //       .WithMany(t => t.GoodsForSale_Providers)
-            //       .HasForeignKey(pt => pt.GoodForSaleId),
-            //   j => j
-            //       .HasOne(pt => pt.Provider)
-            //       .WithMany(p => p.GoodsForSale_Providers)
-            //       .HasForeignKey(pt => pt.ProviderId),
-            //   j =>
-            //   {   
-            //       j.HasKey(t => new { t.ProviderId, t.GoodForSaleId, t.Id });
-            //       j.ToTable("goodsforsale_providers");
-            //   });
+            modelBuilder
+                .Entity<Class>()
+                .HasMany(c => c.Subjects)
+                .WithMany(s => s.Classes)
+                .UsingEntity<Schedule>(
+                   j => j
+                    .HasOne(pt => pt.Subject)
+                    .WithMany(t => t.Schedules)
+                    .HasForeignKey(pt => pt.SubjectId),
+                j => j
+                    .HasOne(pt => pt.Class)
+                    .WithMany(p => p.Schedules)
+                    .HasForeignKey(pt => pt.ClassId),
+                j =>
+                {
+                    j.HasKey(t => new { t.ClassId, t.SubjectId, t.Id, t.Date });
+                    j.ToTable("schedules");
+                });
         }
     }
 }

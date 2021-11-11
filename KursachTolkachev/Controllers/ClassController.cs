@@ -53,7 +53,7 @@ namespace KursachTolkachev.Controllers
 
         public IActionResult Information(int? id)
         {
-            Class myClass = _context.Classes.Where(t => t.Id == id).Include(t => t.ClassChar).Include(t => t.ClassType).Include(t => t.Lessons).ThenInclude(t=>t.Schedules).Include(t => t.Students).Include(t => t.ClassroomTeacher).FirstOrDefault();
+            Class myClass = _context.Classes.Where(t => t.Id == id).Include(t => t.ClassChar).Include(t => t.ClassType).Include(t => t.Students).Include(t=>t.Schedules).Include(t => t.ClassroomTeacher).Include(t=>t.Subjects).FirstOrDefault();
             if (myClass == null)
             {
                 return RedirectToAction("List");

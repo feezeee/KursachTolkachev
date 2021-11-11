@@ -22,10 +22,10 @@ insert into workers (last_name, first_name, middle_name, phone_number, email, pa
 insert into workers (last_name, first_name, middle_name, phone_number, email, password, position_id, qualification_id, access_right_id) values
 ("Учитель", "Учитель", "Учитель", "+375297654321", "йцукенгшщзхъ", "root", 3, 1, 1);
 
-insert into subjects (subject_name) values
-("Математика"),
-("Физика"),
-("Химия");
+insert into subjects (subject_name, worker_id) values
+("Математика", 2),
+("Физика", 2),
+("Химия", 2);
 
 insert into classes_char (char_name) values
 ("А"),
@@ -53,3 +53,9 @@ insert into classes (class_type_id, classroom_teacher_worker_id, class_char_id )
 insert into students (last_name, first_name, middle_name, class_id, access_right_id) values
 ("Ученик1ф", "Ученик1и", "Ученик1о", 1, 1),
 ("Ученик2ф", "Ученик2и", "Ученик2о", 2, 2);
+
+
+insert into schedules (date, class_id, subject_id) values
+("2021-11-10 01:05:47", 1, 1),
+("2021-11-10 01:05:47", 1, 2),
+("2021-11-10 01:05:47", 1, 3);

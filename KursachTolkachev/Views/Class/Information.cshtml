@@ -6,16 +6,27 @@
 <div class="divForClassInf">
     <div class="divForClassPlace">
         <h2>Расписание</h2>
-        <div class="place_main">
-            @foreach(var lesson in Model.Lessons)
-            {
-                foreach()
-            }
-
+        <div class="place_schedule overflow-auto">
+                @foreach (var lesson in Model.Schedules.OrderBy(t => t.Date).GroupBy(t => t.Date.Date))
+                {
+                    <div class="_column">
+                        @lesson.Key.ToShortDateString()
+                        <div class="_inf">
+                            @foreach (var el in lesson)
+                            {
+                            <div class="_subj">
+                                @el.Date.ToShortTimeString() &nbsp &nbsp @el.Subject.Name
+                            </div>
+                            }
+                        </div>
+                    </div>
+                }
+            
         </div>
 
         <h2>Ученики</h2>
         <div class="place_main">
+
             @{
                 int buf = 1;
             }
@@ -23,12 +34,11 @@
                 {
                     <a class="_student" asp-controller="Student" asp-action="Information" asp-route-id="@student.Id">
                         @buf) &nbsp @student.LastName @student.FirstName
-                        @{ 
+                        @{
                             buf++;
                         }
                     </a>
-                }            
-
-        </div>
+                 }
+            </div>
     </div>
 </div>
