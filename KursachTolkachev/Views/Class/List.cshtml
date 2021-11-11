@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Class>
+@{
+    Layout = "_Layout";
+}
+
+
+<div class="divForClasses">     
+
+        @foreach (var myClass in Model)
+        {
+            <a asp-controller="Class" asp-action="Information" asp-route-id="@myClass.Id">@myClass.ClassType?.Name (@myClass.ClassChar?.CharName)</a>
+        }
+</div>
+            

@@ -12,25 +12,26 @@ namespace KursachTolkachev.Models
         [Column("class_id")]
         public int Id { get; set; }
 
-        [Column("class_name")]
-        public string Name { get; set; }
-
 
         [Column("classroom_teacher_worker_id")]
-        public int WorkerId { get; set; }
-        public Worker Worker { get; set; }
+        public int ClassroomTeacherId { get; set; }
+        public Worker ClassroomTeacher { get; set; }
+
 
         [Column("class_type_id")]
         public int ClassTypeId { get; set; }
         public ClassType ClassType { get; set; }
 
 
-        
+        [Column("class_char_id")]
+        public int ClassCharId { get; set; }
+        public ClassChar ClassChar { get; set; }
+
+
 
 
         public virtual List<Student> Students { get; set; } = new List<Student>();
-
-        public virtual List<Lesson> Lessons { get; set; } = new List<Lesson>();
+        public virtual List<Schedule> Schedules { get; set; } = new List<Schedule>();
 
     }
 }

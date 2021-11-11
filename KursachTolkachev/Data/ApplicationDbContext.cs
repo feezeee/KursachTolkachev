@@ -22,6 +22,7 @@ namespace KursachTolkachev.Data
         public DbSet<Lesson> Lessons { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<ClassType> ClassTypes { get; set; }
+        public DbSet<ClassChar> ClassChars { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

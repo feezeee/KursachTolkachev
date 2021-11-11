@@ -90,3 +90,45 @@
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
+
+
+.divForClasses{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+.divForClasses a{
+    padding: 40px;
+}
+
+.divForClassInf {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divForClassPlace {
+    min-width: 600px;
+    min-height: 400px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 30px;
+}
+
+.place_main{
+    display:flex;
+    flex-direction:column;
+}
+
+.place_main ._student {
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+._student:hover
+{
+    color: gray;
+}

@@ -1,0 +1,32 @@
+﻿@model Class
+@{
+    Layout = "_Layout";
+    
+}
+
+<div class="divForEdit">
+    <form class="FormForEdit" asp-controller="Class" asp-action="Create" method="post">
+        <a type="button" asp-controller="Class" asp-action="List" class="close">X</a>
+        <h2>
+            @ViewBag.WhatCreate
+        </h2>
+        <ul class="properties">
+            <li>
+                <span>выберите цифру для класса*</span>
+                <select required asp-for="ClassTypeId" asp-items="ViewBag.ClassTypes"></select>
+            </li>
+            <li>
+                <span>Выберите букву для класса*</span>
+                <select required asp-for="ClassCharId" asp-items="ViewBag.ClassChars"></select>
+            </li>
+            <li>
+                <span>Выберите классного руководителя*</span>
+                <select required asp-for="ClassroomTeacherId" asp-items="ViewBag.Teachers"></select>
+            </li>
+        </ul>
+        <div class="button_place">
+            <button type="submit" class="btn btn-success">Создать</button>
+            <button type="reset" class="btn btn-danger">Очистить</button>
+        </div>
+    </form>
+</div>

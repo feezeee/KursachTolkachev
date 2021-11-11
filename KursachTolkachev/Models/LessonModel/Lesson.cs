@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace KursachTolkachev.Models
 {
-    [Table("classes_subjects_workers")]
+    [Table("lessons")]
     public class Lesson
     {
-        [Column("class_subject_worker_id")]
+        [Column("lesson_id")]
         public int Id { get; set; }
 
 

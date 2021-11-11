@@ -21,7 +21,7 @@ namespace KursachTolkachev.Models
         [Column("end_time")]
         public DateTime EndTime { get; set; }
 
-        [Column("class_subject_worker_id")]
+        [Column("lesson_id")]
         public int ClassSubjectWorkerId { get; set; }
         public Lesson ClassSubjectWorker { get; set; }
     }
