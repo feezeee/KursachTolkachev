@@ -1,0 +1,172 @@
+﻿html, body{
+    height: 100%;
+    margin:0;
+}
+
+.divForEdit{
+    height: 100%;
+    width: 100%;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.FormForEdit {
+    min-height: 300px;
+    min-width: 800px;
+    background-color: #e9fffc;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.properties {
+    margin: 0;
+    margin-top: 10px;
+    padding: 0;
+
+    display: flex;
+    justify-content: space-between;
+    flex-wrap:wrap;
+    row-gap: 30px;
+}
+
+.properties li {
+    width: 40%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.properties li input, .properties li select {
+    border-radius: 5px;
+    border: 1px solid #808080;
+    padding: 10px;
+}
+
+.button_place {
+    margin: 0;
+    margin-top: 70px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-around;
+}
+.button_place button{
+    min-width: 200px;
+    min-height: 50px;
+    border-radius: 10px;
+}
+
+.button_place a {
+    min-width: 200px;
+    min-height: 50px;
+    border-radius: 10px;
+}
+.button_place a div {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.rowEditStart{
+    cursor: pointer;
+}
+
+.divforDelete {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.FormForDelete {
+    min-height: 200px;
+    min-width: 600px;
+    background-color: #e9fffc;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+
+.divForClasses{
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+.divForClasses a{
+    padding: 40px;
+}
+
+.divForClassInf {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divForClassPlace {
+    min-width: 600px;
+    min-height: 400px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 30px;
+}
+
+.place_main{
+    display:flex;
+    flex-direction:column;
+}
+
+.place_main ._student {
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+._student:hover
+{
+    color: gray;
+}
+
+.place_schedule {
+    display: flex;   
+    min-height: 200px;
+    margin-bottom: 30px;
+    
+}
+.place_schedule ._column {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 1px solid gray;
+    text-align:center;
+}
+
+.place_schedule ._column ._inf {
+   margin-top: 10px;
+}
+
+
+.place_schedule ._column:nth-last-child(-n+1) {
+    border-right: 1px solid gray;
+}
+
+.place_schedule ._column ._inf ._subj {
+    display: flex;
+    width: max-content;
+}
+
+
+.table tbody tr:hover
+{
+    background-color: lightgray;
+}
+
+
