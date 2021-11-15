@@ -1,5 +1,6 @@
 ﻿using KursachTolkachev.Data;
 using KursachTolkachev.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult Add(int? classId)
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -34,6 +36,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Директор, Администратор")]
         public async Task<IActionResult> Add(Schedule schedule)
         {
             if (ModelState.IsValid)
@@ -76,6 +79,34 @@ namespace KursachTolkachev.Controllers
 
         }
 
+
+        [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
+        public IActionResult Delete(int? id)
+        {
+            Schedule schedule = _context.Schedules.Where(t => t.Id == id).Include(t => t.Subject).Include(t => t.Class).FirstOrDefault();
+            if (schedule == null)
+            {
+                return RedirectToAction("Information", "Class", new { id = schedule.ClassId });
+            }
+            return View(schedule);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Директор, Администратор")]
+        public IActionResult DeleteConfirmed(int? id)
+        {
+            Schedule schedule = _context.Schedules.Where(t => t.Id == id).Include(t => t.Subject).Include(t => t.Class).FirstOrDefault();
+
+            if (schedule == null)
+            {
+                return RedirectToAction("Information", "Class", new { id = schedule.ClassId });
+            }
+            _context.Schedules.Remove(schedule);
+            _context.SaveChanges();
+            return RedirectToAction("Information", "Class", new { id = schedule.ClassId });
+        }
+
         //public ViewResult List(Schedule schedule)
         //{
         //    if (schedule.Date == DateTime.MinValue)
@@ -97,15 +128,19 @@ namespace KursachTolkachev.Controllers
         //    {
         //        return RedirectToAction("List");
         //    }
-        //    Worker worker = _context.Workers.Include(t => t.Position).Include(t => t.Qualification).Include(t => t.AccessRight).Where(t => t.Id == id).Select(t => t).FirstOrDefault();
-        //    if (worker != null)
+        //    Schedule schedule = _context.Schedules.Where(t => t.Id == id).Include(t => t.Subject).Include(t => t.Class).FirstOrDefault();
+        //    if (schedule != null)
         //    {
-        //        ViewBag.Positions = new SelectList(_context.Positions, "Id", "Name");
-        //        ViewBag.Qualifications = new SelectList(_context.Qualifications, "Id", "Name");
-        //        ViewBag.AccessRights = new SelectList(_context.AccessRights, "Id", "Name");
-        //        return View(worker);
+        //        List<SelectListItem> list = new List<SelectListItem>();
+        //        foreach (var el in _context.Subjects.Include(t => t.Worker))
+        //        {
+        //            list.Add(new SelectListItem { Text = $"{el.SubjectInfo()}", Value = el.Id.ToString() });
+        //        }
+
+        //        ViewBag.AvailableSubjects = list;
+        //        return View(schedule);
         //    }
-        //    return RedirectToAction("List");
+        //    return RedirectToAction("List","Class");
 
         //}
 

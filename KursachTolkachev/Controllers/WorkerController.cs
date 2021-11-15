@@ -1,17 +1,6 @@
-﻿//using KursachTolkachev.Models;
-//using Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNetCore.Mvc;
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using System.Linq;
-//using Microsoft.EntityFrameworkCore;
-//using KursachTolkachev.Data;
-//using Microsoft.AspNetCore.Mvc.Rendering;
-
-using KursachTolkachev.Data;
+﻿using KursachTolkachev.Data;
 using KursachTolkachev.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +18,7 @@ namespace KursachTolkachev.Controllers
         }
 
 
-        //[Authorize(Roles = "Директор, Администратор")]
+        [Authorize(Roles = "Директор, Администратор")]
         public ViewResult List(Worker worker)
         {
             var workers = _context.Workers.Include(t => t.Position).Include(t => t.Qualification).Include(t => t.AccessRight).Select(t => t);
@@ -37,6 +26,7 @@ namespace KursachTolkachev.Controllers
         }
 
 
+        [Authorize(Roles = "Директор, Администратор")]
         [HttpGet]
         public ViewResult Create()
         {
@@ -49,6 +39,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Директор, Администратор")]
         public async Task<IActionResult> Create(Worker worker)
         {
             if (ModelState.IsValid)
@@ -64,6 +55,7 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult Edit(int? id)
         {
             if (id == 0)
@@ -84,6 +76,7 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Директор, Администратор")]
         public async Task<IActionResult> Edit(Worker worker)
         {
             if (ModelState.IsValid)
@@ -109,6 +102,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult Delete(int? id)
         {
             Worker worker = _context.Workers.Find(id);
@@ -125,6 +119,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult DeleteConfirmed(int? id)
         {
             Worker worker = _context.Workers.Find(id);

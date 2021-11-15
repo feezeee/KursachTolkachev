@@ -6,32 +6,49 @@
 <div class="divForClassInf">
     <div class="divForClassPlace">
         <a type="button" asp-controller="Class" asp-action="List" class="close">X</a>
-        <p class="display-4">@Model.ClassInfo() класс</p> 
+        <p class="display-4">@Model.ClassInfo() класс</p>
         @if (Model.Students.Count == 0)
         {
-            <a asp-controller="Class" asp-action="Delete" asp-route-id="@Model.Id">Удалить</a>
-        }
-        <div class="d-flex align-items-center" style="column-gap: 20px;">
-            <h2>Расписание</h2>
-            <a asp-controller="Schedule" asp-action="Add" asp-route-classId="@Model.Id">Добавить</a>
-        </div>
-        <div class="place_schedule overflow-auto">
-            @foreach (var lesson in Model.Schedules.OrderBy(t => t.Date).GroupBy(t => t.Date.Date))
+            @if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
             {
-                <div class="_column">
-                    @lesson.Key.ToShortDateString()
-                    <div class="_inf">
-                        @foreach (var el in lesson)
-                        {
-                            <div class="_subj">
-                                @el.Date.ToShortTimeString() &nbsp &nbsp @el.Subject.Name
-                            </div>
-                        }
-                    </div>
-                </div>
+                <a asp-controller="Class" asp-action="Delete" asp-route-id="@Model.Id">Удалить</a>
             }
+        }
+    <div class="d-flex align-items-center" style="column-gap: 20px;">
+        <h2>Расписание</h2>
+        @if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
+        {
+            <a asp-controller="Schedule" asp-action="Add" asp-route-classId="@Model.Id">Добавить</a>
+        }
+    </div>
+            <div class="place_schedule overflow-auto">
+                @foreach (var lesson in Model.Schedules.OrderBy(t => t.Date).GroupBy(t => t.Date.Date))
+                {
+                    <div class="_column">
+                        @lesson.Key.ToShortDateString()
+                        <div class="_inf">
+                            @foreach (var el in lesson)
+                            {
+                                @if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
+                                {
+                                    <a class="_subj" asp-controller="Schedule" asp-action="Delete" asp-route-id="@el.Id">
+                                        @el.Date.ToShortTimeString() &nbsp &nbsp @el.Subject.Name
+                                    </a>
 
-        </div>
+                                }
+                                else
+                                {
+                                    <div class="_subj">
+                                        @el.Date.ToShortTimeString() &nbsp &nbsp @el.Subject.Name
+                                    </div>
+                                }
+
+                            }
+                            </div>
+                    </div>
+                }
+
+            </div>
 
         <h2>Ученики</h2>
         <div class="place_main">
@@ -41,12 +58,25 @@
             }
             @foreach (var student in Model.Students)
             {
-                <a class="_student" asp-controller="Student" asp-action="Edit" asp-route-id="@student.Id">
-                    @buf) &nbsp @student.LastName @student.FirstName
-                    @{
-                        buf++;
-                    }
-                </a>
+                @if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
+                {
+                    <a class="_student" asp-controller="Student" asp-action="Edit" asp-route-id="@student.Id">
+                        @buf) &nbsp @student.LastName @student.FirstName
+                        @{
+                            buf++;
+                        }
+                    </a>
+                }
+                else
+                {
+                    <div class="_student">
+                        @buf) &nbsp @student.LastName @student.FirstName
+                        @{
+                            buf++;
+                        }
+                    </div>
+                }
+
             }
         </div>
     </div>

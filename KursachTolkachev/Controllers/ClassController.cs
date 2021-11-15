@@ -1,5 +1,6 @@
 ﻿using KursachTolkachev.Data;
 using KursachTolkachev.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public ViewResult Create()
         {
             ViewBag.ClassChars = new SelectList(_context.ClassChars, "Id", "CharName");
@@ -39,6 +41,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Директор, Администратор")]
         public async Task<IActionResult> Create(Class myClass)
         {
             if (ModelState.IsValid)
@@ -64,6 +67,7 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult Delete(int? id)
         {
             Class myClass = _context.Classes.Include(t => t.Subjects).Include(t=>t.Students).Where(t => t.Id == id).FirstOrDefault();
@@ -76,6 +80,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult DeleteConfirmed(int? id)
         {
             Class myClass = _context.Classes.Include(t => t.Subjects).Include(t => t.Students).Where(t => t.Id == id).FirstOrDefault();

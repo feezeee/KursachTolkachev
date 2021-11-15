@@ -27,28 +27,33 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                    Работники
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" asp-controller="Worker" asp-action="List">Список сотрудников</a>
-                                    <a class="dropdown-item" asp-controller="Worker" asp-action="Create">Добавить сотрудника</a>
+
+                        @if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
+                        {
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                        Работники
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" asp-controller="Worker" asp-action="List">Список сотрудников</a>
+                                        <a class="dropdown-item" asp-controller="Worker" asp-action="Create">Добавить сотрудника</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                                    Квалификации
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" asp-controller="Qualification" asp-action="List">Список квалификаций</a>
-                                    <a class="dropdown-item" asp-controller="Qualification" asp-action="Create">Добавить квалификацию</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                                        Квалификации
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" asp-controller="Qualification" asp-action="List">Список квалификаций</a>
+                                        <a class="dropdown-item" asp-controller="Qualification" asp-action="Create">Добавить квалификацию</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        }
                         <li class="nav-item">
                             <div class="dropdown">
                                 <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
@@ -56,7 +61,10 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" asp-controller="Subject" asp-action="List">Список предметов</a>
-                                    <a class="dropdown-item" asp-controller="Subject" asp-action="Create">Добавить предмет</a>
+                                    @if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
+                                    {
+                                        <a class="dropdown-item" asp-controller="Subject" asp-action="Create">Добавить предмет</a>
+                                    }
                                 </div>
                             </div>
                         </li>
@@ -67,7 +75,10 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" asp-controller="Class" asp-action="List">Классы</a>
-                                    <a class="dropdown-item" asp-controller="Class" asp-action="Create">Добавить класс</a>
+                                    @if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
+                                    {
+                                        <a class="dropdown-item" asp-controller="Class" asp-action="Create">Добавить класс</a>
+                                    }
                                 </div>
                             </div>
                         </li>
@@ -78,26 +89,28 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" asp-controller="Student" asp-action="List">Ученики</a>
-                                    <a class="dropdown-item" asp-controller="Student" asp-action="Create">Добавить ученика</a>
+                                    @if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
+                                    {
+                                        <a class="dropdown-item" asp-controller="Student" asp-action="Create">Добавить ученика</a>
+
+                                    }
                                 </div>
                             </div>
                         </li>
-                        @*<li class="nav-item">
-            <div class="dropdown">
-                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                    Расписания
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" asp-controller="Home" asp-action="Privacy">Action</a>
-                    <a class="dropdown-item" asp-controller="Home" asp-action="Privacy">Another action</a>
-                    <a class="dropdown-item" asp-controller="Home" asp-action="Privacy">Something else here</a>
-                </div>
-            </div>
-        </li>*@
                     </ul>
                 </div>
             </div>
+            <div>
+                @AuthorizedUser.GetInstance().GetWorker().FIO()
+            </div>
+            <form method="post" asp-controller="Account" asp-action="Logout">
+
+                <button class="btn btn-light">
+                    Выход
+                </button>
+            </form>
         </nav>
+        
     </header>
     <main class="container flex-grow-1" style="height: max-content;">
         <div class="calendar">@RenderSection("Calendar", false)</div>

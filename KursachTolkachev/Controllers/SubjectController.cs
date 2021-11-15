@@ -1,5 +1,6 @@
 ﻿using KursachTolkachev.Data;
 using KursachTolkachev.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace KursachTolkachev.Controllers
 
 
         //[Authorize(Roles = "Директор, Администратор")]
+
         public ViewResult List(Subject subject)
         {
             var subjects = _context.Subjects.Include(t=>t.Worker).Select(t => t);
@@ -28,6 +30,7 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public ViewResult Create()
         {
             ViewBag.WhatEdit = "Добавление предмета";
@@ -41,6 +44,8 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost]
+
+        [Authorize(Roles = "Директор, Администратор")]
         public async Task<IActionResult> Create(Subject subject)
         {
             if (ModelState.IsValid)
@@ -63,6 +68,8 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpGet]
+
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult Edit(int? id)
         {
             if (id == 0)
@@ -87,6 +94,7 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Директор, Администратор")]
         public async Task<IActionResult> Edit(Subject subject)
         {
             if (ModelState.IsValid)
@@ -107,6 +115,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult Delete(int? id)
         {
             Subject subject = _context.Subjects.Include(t => t.Worker).Where(t => t.Id == id).Include(t => t.Classes).FirstOrDefault();
@@ -119,6 +128,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult DeleteConfirmed(int? id)
         {
             Subject subject = _context.Subjects.Include(t => t.Worker).Where(t => t.Id == id).Include(t => t.Classes).FirstOrDefault();

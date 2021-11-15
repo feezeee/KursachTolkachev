@@ -1,5 +1,6 @@
 ﻿using KursachTolkachev.Data;
 using KursachTolkachev.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +20,7 @@ namespace KursachTolkachev.Controllers
 
 
         //[Authorize(Roles = "Директор, Администратор")]
+        [Authorize(Roles = "Директор, Администратор")]
         public ViewResult List(Qualification qualification)
         {
             var qualifications = _context.Qualifications.Select(t => t);
@@ -27,6 +29,7 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public ViewResult Create()
         {            
             ViewBag.WhatEdit = "Добавление квалификации";
@@ -34,6 +37,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Директор, Администратор")]
         public async Task<IActionResult> Create(Qualification qualification)
         {
             if (ModelState.IsValid)
@@ -49,6 +53,7 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult Edit(int? id)
         {
             if (id == 0)
@@ -66,6 +71,7 @@ namespace KursachTolkachev.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Директор, Администратор")]
         public async Task<IActionResult> Edit(Qualification qualification)
         {
             if (ModelState.IsValid)
@@ -79,6 +85,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult Delete(int? id)
         {
             Qualification qualification = _context.Qualifications.Include(t => t.Workers).Where(t => t.Id == id).FirstOrDefault();
@@ -91,6 +98,7 @@ namespace KursachTolkachev.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Директор, Администратор")]
         public IActionResult DeleteConfirmed(int? id)
         {
             Qualification qualification = _context.Qualifications.Include(t => t.Workers).Where(t => t.Id == id).FirstOrDefault();
