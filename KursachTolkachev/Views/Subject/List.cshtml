@@ -19,9 +19,15 @@
                     <th class="text-center editId">@subject.Id</th>
                     <td class="text-center">@subject.Name</td>
                     <td class="text-center">@subject.Worker.LastName @subject.Worker.FirstName @subject.Worker.MiddleName</td>
-            </tr>
+                </tr>
             }
 
         </tbody>
     </table>
 </div>
+@if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
+{
+    <script src="~/js/subject.js">
+
+    </script>
+}

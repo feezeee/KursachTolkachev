@@ -42,6 +42,7 @@ namespace KursachTolkachev.Controllers
                 {
 
                     await Authenticate(user); // аутентификация
+                    AuthorizedUser.GetInstance().ClearUser();
                     AuthorizedUser.GetInstance().SetUser(user);
                     return RedirectToAction("Index", "Home");
                     

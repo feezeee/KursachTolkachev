@@ -1,4 +1,4 @@
-﻿if (User.IsInRole("Администратор") || User.IsInRole("Директор")) {
+﻿
     $(function () {
         $('#editWorker').on('click', '.rowEditStart', function () {
             var id = parseInt($(this).find('.editId').html());
@@ -6,4 +6,4 @@
             //alert($(this).find('.editId').html());
         });
     });
-}
+

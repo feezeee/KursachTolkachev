@@ -23,3 +23,9 @@
         </tbody>
     </table>
 </div>
+@if (User.IsInRole("Администратор") || User.IsInRole("Директор"))
+{
+    <script src="~/js/qualification.js">
+
+    </script>
+}
