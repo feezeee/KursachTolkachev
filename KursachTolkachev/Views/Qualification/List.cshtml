@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Qualification>
+@{
+    Layout = "_Layout";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Квалификация</th>
+            </tr>
+        </thead>
+        <tbody id="editQualification">
+            @foreach (var qualification in Model)
+            {
+                <tr class="rowEditStart">
+                    <th class="text-center editId">@qualification.Id</th>
+                    <td class="text-center">@qualification.Name</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

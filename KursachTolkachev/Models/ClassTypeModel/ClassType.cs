@@ -13,7 +13,7 @@ namespace KursachTolkachev.Models
         public int Id { get; set; }
 
         [Column("type_number")]
-        public string Name { get; set; }
+        public int Number { get; set; }
 
 
         public virtual List<Class> Classes { get; set; } = new List<Class>();

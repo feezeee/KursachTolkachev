@@ -1,0 +1,29 @@
+﻿@model Subject
+@{
+    Layout = "_Layout";
+
+}
+
+<div class="divForEdit">
+    <form class="FormForEdit" asp-controller="Subject" asp-action="Create" method="post">
+        <a type="button" asp-controller="Subject" asp-action="List" class="close">X</a>
+        <h2>
+            @ViewBag.WhatEdit
+        </h2>
+        <ul class="properties">
+            <li>
+                <span>Введите наименование предмета*</span>
+                <input required asp-for="Name" type="text" placeholder="Наименование:" />
+                @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
+            </li>
+            <li>
+                <span>Выберите преподавателя*</span>
+                <select required asp-for="WorkerId" asp-items="@ViewBag.Workers"></select>
+            </li>            
+        </ul>
+        <div class="button_place">
+            <button type="submit" class="btn btn-success">Создать</button>
+            <button type="reset" class="btn btn-danger">Очистить</button>
+        </div>
+    </form>
+</div>

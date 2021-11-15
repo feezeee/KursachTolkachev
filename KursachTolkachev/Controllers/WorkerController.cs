@@ -70,7 +70,7 @@ namespace KursachTolkachev.Controllers
             {
                 return RedirectToAction("List");
             }
-            Worker worker = _context.Workers.Include(t => t.Position).Include(t => t.Qualification).Include(t => t.AccessRight).Where(t => t.Id == id).Select(t => t).FirstOrDefault();
+            Worker worker = _context.Workers.Include(t => t.Position).Include(t => t.Qualification).Include(t => t.AccessRight).Include(t=>t.Lessons).Include(t=>t.Classes).Where(t => t.Id == id).Select(t => t).FirstOrDefault();
             if (worker != null)
             {
                 ViewBag.Positions = new SelectList(_context.Positions, "Id", "Name");
@@ -88,13 +88,13 @@ namespace KursachTolkachev.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (worker.Id == AuthorizedUser.GetInstance().GetWorker().Id)
-                //{
-                //    worker.Position = _context.Positions.Find(worker.PositionId);
-                //    worker.Gender = _context.Genders.Find(worker.GenderId);
-                //    AuthorizedUser.GetInstance().ClearUser();
-                //    AuthorizedUser.GetInstance().SetUser(worker);
-                //}
+                if (worker.Id == AuthorizedUser.GetInstance().GetWorker().Id)
+                {
+                    worker.Position = _context.Positions.Find(worker.PositionId);
+                    worker.AccessRight = _context.AccessRights.Find(worker.AccessRightId);
+                    AuthorizedUser.GetInstance().ClearUser();
+                    AuthorizedUser.GetInstance().SetUser(worker);
+                }
                 _context.Entry(worker).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return RedirectToAction("List");
@@ -103,6 +103,8 @@ namespace KursachTolkachev.Controllers
             ViewBag.Positions = new SelectList(_context.Positions, "Id", "Name");
             ViewBag.Qualifications = new SelectList(_context.Qualifications, "Id", "Name");
             ViewBag.AccessRights = new SelectList(_context.AccessRights, "Id", "Name");
+            worker.Lessons = _context.Subjects.Where(t => t.WorkerId == worker.Id).Select(t => t).ToList();
+            worker.Classes = _context.Classes.Where(t => t.ClassroomTeacherId == worker.Id).Select(t => t).ToList();
             return View(worker);
         }
 

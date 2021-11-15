@@ -1,14 +1,19 @@
-﻿@model IEnumerable<Class>
+﻿@model  IEnumerable<IGrouping<int, Class>>
 @{
     Layout = "_Layout";
 }
 
 
-<div class="divForClasses">     
+<div class="divForClasses">
 
-        @foreach (var myClass in Model)
+    @foreach (var el in Model)
+    {
+        <h2 style="width:100%;">@el.Key-е классы</h2>
+        @foreach (var myClass in el)
         {
-            <a asp-controller="Class" asp-action="Information" asp-route-id="@myClass.Id">@myClass.ClassType?.Name (@myClass.ClassChar?.CharName)</a>
+            <a asp-controller="Class" asp-action="Information" asp-route-id="@myClass.Id">@myClass.ClassType?.Number (@myClass.ClassChar?.CharName)</a>
         }
+
+    }
 </div>
             

@@ -1,0 +1,30 @@
+﻿@model Qualification
+@{
+    Layout = "_Layout";
+
+}
+
+<div class="divForEdit">
+    <form class="FormForEdit" asp-controller="Qualification" asp-action="Edit" method="post">
+        <a type="button" asp-controller="Qualification" asp-action="List" class="close">X</a>
+        <h2>
+            Редактирование квалификации
+        </h2>
+        <ul class="properties">
+            <li>
+                <span>Введите наименование квалификации*</span>
+                <input hidden asp-for="Id" type="text" value="@Model.Id" />
+                <input required asp-for="Name" type="text" placeholder="Наименование:" value="@Model.Name" />
+            </li>
+            
+        </ul>
+        <div class="button_place">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <button type="reset" class="btn btn-danger">Очистить</button>
+            @if (Model.Workers.Count == 0)
+            {
+                <a class="btn btn-danger" asp-controller="Qualification" asp-action="Delete" asp-route-id=@Model.Id><div>Удалить</div></a>
+            }
+        </div>
+    </form>
+</div>

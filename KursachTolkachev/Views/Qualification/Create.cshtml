@@ -1,0 +1,24 @@
+﻿@model Qualification
+@{
+    Layout = "_Layout";
+
+}
+
+<div class="divForEdit">
+    <form class="FormForEdit" asp-controller="Qualification" asp-action="Create" method="post">
+        <a type="button" asp-controller="Qualification" asp-action="List" class="close">X</a>
+        <h2>
+            @ViewBag.WhatEdit
+        </h2>
+        <ul class="properties">
+            <li>
+                <span>Введите наименование квалификации*</span>
+                <input required asp-for="Name" type="text" placeholder="Наименование:" />
+            </li>           
+        </ul>
+        <div class="button_place">
+            <button type="submit" class="btn btn-success">Создать</button>
+            <button type="reset" class="btn btn-danger">Очистить</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Schedule>
+@{
+    Layout = "_Layout";
+}
+
+<div class="divForEdit">
+    <form class="FormForSchedule" asp-controller="Schedule" asp-action="Edit" method="post">
+        @*<a type="button" asp-controller="Schedule" asp-action="List" class="close">X</a>*@
+        <h2>
+            @*@Model.Date.ToShortDateString()*@
+        </h2>
+        <ul class="ScheduleParams">         
+            @foreach(var el in Model)
+            {
+                <li>
+                    <p class="text-center">@el.Date.ToShortTimeString()</p>
+                    <div>
+                        @*<select asp-items="ViewBag.Subjects"></select>*@
+                    </div>
+                </li>
+            }
+            @*<li>
+                <p class="text-center">09:00 - 09:45</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>
+            <li>
+                <p class="text-center">10:00 - 10:45</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>
+            <li>
+                <p class="text-center">11:00 - 11:45</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>
+            <li>
+                <p class="text-center">12:00 - 12:45</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>
+            <li>
+                <p class="text-center">13:00 - 13:45</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>
+            <li>
+                <p class="text-center">14:00 - 14:45</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>
+            <li>
+                <p class="text-center">15:25 - 16:10</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>
+            <li>
+                <p class="text-center">16:25 - 17:10</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>
+            <li>
+                <p class="text-center">17:25 - 18:10</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>
+            <li>
+                <p class="text-center">18:25 - 19:10</p>
+                <div>
+                    <select asp-items="ViewBag.Subjects"></select>
+                </div>
+            </li>*@
+        </ul>
+        <div class="scheduleButtons">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <button type="reset" class="btn btn-danger">Очистить</button>
+            <a class="btn btn-danger" asp-controller="Student" asp-action="Delete"><div>Удалить</div></a>
+        </div>
+    </form>
+</div>
+
+@section Calendar
+{
+
+    <form name="test" class="divForSchedule">
+            <input id="foo" onClick="xCal(this, {autoOff: 1, autoOn: 1, hide: 1})" onKeyUp="xCal()" name="schedule.Date.Date" value="@ViewBag.Dates"/>       
+    </form>
+}
+
+
+
+<link rel="stylesheet" type="text/css" href="~/css/cssworld.ru-xcal.css" />
+<script type="text/javascript" src="~/js/cssworld.ru-xcal.js"></script>

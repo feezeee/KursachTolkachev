@@ -12,8 +12,8 @@
 }
 
 .FormForEdit {
-    min-height: 400px;
-    min-width: 600px;
+    min-height: 300px;
+    min-width: 800px;
     background-color: #e9fffc;
     padding: 30px;
     border-radius: 15px;
@@ -36,6 +36,7 @@
     list-style-type: none;
     display: flex;
     flex-direction: column;
+    justify-content: end;
 }
 
 .properties li input, .properties li select {
@@ -152,7 +153,20 @@
    margin-top: 10px;
 }
 
+
+.place_schedule ._column:nth-last-child(-n+1) {
+    border-right: 1px solid gray;
+}
+
 .place_schedule ._column ._inf ._subj {
     display: flex;
     width: max-content;
-}
+}
+
+
+.table tbody tr:hover
+{
+    background-color: lightgray;
+}
+
+

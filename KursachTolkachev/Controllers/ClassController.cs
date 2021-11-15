@@ -22,7 +22,7 @@ namespace KursachTolkachev.Controllers
         //[Authorize(Roles = "Директор, Администратор")]
         public ViewResult List(Class myClass)
         {
-            var classes = _context.Classes.Include(t=>t.ClassroomTeacher).Include(t=>t.ClassType).Include(t=>t.ClassChar).Select(t => t).OrderBy(t=>t.ClassType);
+            var classes = _context.Classes.Include(t=>t.ClassroomTeacher).Include(t=>t.ClassType).Include(t=>t.ClassChar).OrderBy(t => t.ClassChar.CharName).AsEnumerable().GroupBy(t=>t.ClassType.Number).OrderBy(t=>t.Key).Select(t => t);
             return View(classes);
         }
 
@@ -32,7 +32,7 @@ namespace KursachTolkachev.Controllers
         public ViewResult Create()
         {
             ViewBag.ClassChars = new SelectList(_context.ClassChars, "Id", "CharName");
-            ViewBag.ClassTypes = new SelectList(_context.ClassTypes, "Id", "Name");
+            ViewBag.ClassTypes = new SelectList(_context.ClassTypes, "Id", "Number");
             ViewBag.Teachers = new SelectList(_context.Workers.Where(t=>t.Position.Name == "Учитель").Select(t=>t), "Id", "LastName");
             ViewBag.WhatCreate = "Создание нового класса";
             return View();
@@ -60,6 +60,38 @@ namespace KursachTolkachev.Controllers
             }
 
             return View(myClass);
+        }
+
+
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            Class myClass = _context.Classes.Include(t => t.Subjects).Include(t=>t.Students).Where(t => t.Id == id).FirstOrDefault();
+            if (myClass == null || myClass.Students.Count != 0)
+            {
+                return RedirectToAction("List");
+            }
+
+            return View(myClass);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int? id)
+        {
+            Class myClass = _context.Classes.Include(t => t.Subjects).Include(t => t.Students).Where(t => t.Id == id).FirstOrDefault();
+            if (myClass == null || myClass.Students.Count != 0)
+            {
+                return RedirectToAction("List");
+            }
+
+            foreach(var sub in myClass.Schedules)
+            {
+                _context.Schedules.Remove(sub);
+            }
+
+            _context.Classes.Remove(myClass);
+            _context.SaveChanges();
+            return RedirectToAction("List");
         }
     }
 }

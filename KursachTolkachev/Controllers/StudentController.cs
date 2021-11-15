@@ -36,12 +36,14 @@ namespace KursachTolkachev.Controllers
             Student student = _context.Students.Include(t => t.Class).ThenInclude(t => t.ClassChar).Include(t => t.Class).ThenInclude(t => t.ClassType).Where(t=>t.Id == id).Select(t => t).FirstOrDefault();
             if (student != null)
             {
-                //List<SelectList> list = new List<SelectList>();
-                //foreach (var el in _context.Classes)
-                //{
-                //    list.Add(new SelectListItem { Selected= true, Text})
-                //}
-                ViewBag.Classes = new SelectList(_context.Classes.Include(t => t.ClassChar).Include(t => t.ClassType).Select(t=>t), "Id", "ClassType.Name");
+                List<SelectListItem> list = new List<SelectListItem>();
+                foreach (var el in _context.Classes.Include(t => t.ClassChar).Include(t => t.ClassType).OrderBy(t => t.ClassChar.CharName).OrderBy(t => t.ClassType.Number).Select(t => t))
+                {
+                    list.Add(new SelectListItem { Text = $"{el.ClassInfo()}", Value = el.Id.ToString() });
+                }
+
+                ViewBag.Classes = list;
+               
                 return View(student);
             }
             return RedirectToAction("List");
@@ -53,21 +55,17 @@ namespace KursachTolkachev.Controllers
         {
             if (ModelState.IsValid)
             {
-                //if (worker.Id == AuthorizedUser.GetInstance().GetWorker().Id)
-                //{
-                //    worker.Position = _context.Positions.Find(worker.PositionId);
-                //    worker.Gender = _context.Genders.Find(worker.GenderId);
-                //    AuthorizedUser.GetInstance().ClearUser();
-                //    AuthorizedUser.GetInstance().SetUser(worker);
-                //}
                 _context.Entry(student).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
                 return RedirectToAction("List");
             }
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var el in _context.Classes.Include(t => t.ClassChar).Include(t => t.ClassType).OrderBy(t => t.ClassChar.CharName).OrderBy(t => t.ClassType.Number).Select(t => t))
+            {
+                list.Add(new SelectListItem { Text = $"{el.ClassInfo()}", Value = el.Id.ToString() });
+            }
 
-            ViewBag.Positions = new SelectList(_context.Positions, "Id", "Name");
-            ViewBag.Qualifications = new SelectList(_context.Qualifications, "Id", "Name");
-            ViewBag.AccessRights = new SelectList(_context.AccessRights, "Id", "Name");
+            ViewBag.Classes = list;
             return View(student);
         }
 
@@ -77,24 +75,34 @@ namespace KursachTolkachev.Controllers
         [HttpGet]
         public ViewResult Create()
         {
-            //ViewBag.ClassChars = new SelectList(_context.ClassChars, "Id", "CharName");
-            //ViewBag.ClassTypes = new SelectList(_context.ClassTypes, "Id", "Name");
-            //ViewBag.Teachers = new SelectList(_context.Workers.Where(t => t.Position.Name == "Учитель").Select(t => t), "Id", "LastName");
-            //ViewBag.WhatCreate = "Создание нового класса";
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var el in _context.Classes.Include(t => t.ClassChar).Include(t => t.ClassType).OrderBy(t => t.ClassChar.CharName).OrderBy(t => t.ClassType.Number).Select(t => t))
+            {
+                list.Add(new SelectListItem { Text = $"{el.ClassInfo()}", Value = el.Id.ToString() });
+            }
+
+            ViewBag.Classes = list;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Class myClass)
+        public async Task<IActionResult> Create(Student student)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(myClass);
+                _context.Add(student);
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction("List");
             }
-            return View();
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var el in _context.Classes.Include(t => t.ClassChar).Include(t => t.ClassType).OrderBy(t => t.ClassChar.CharName).OrderBy(t => t.ClassType.Number).Select(t => t))
+            {
+                list.Add(new SelectListItem { Text = $"{el.ClassInfo()}", Value = el.Id.ToString() });
+            }
+
+            ViewBag.Classes = list;
+            return View(student);
         }
 
 

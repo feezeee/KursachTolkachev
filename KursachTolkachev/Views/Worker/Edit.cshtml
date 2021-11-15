@@ -58,7 +58,7 @@
         <div class="button_place">
             <button type="submit" class="btn btn-success">Сохранить</button>
             <button type="reset" class="btn btn-danger">Очистить</button>
-            @if (AuthorizedUser.GetInstance().GetWorker().Id != Model.Id)
+            @if (AuthorizedUser.GetInstance().GetWorker().Id != Model.Id && Model.Classes.Count == 0 && Model.Lessons.Count == 0)
             {
                 <a class="btn btn-danger" asp-controller="Worker" asp-action="Delete" asp-route-id=@Model.Id><div>Удалить</div></a>
             }

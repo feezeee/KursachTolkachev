@@ -1,0 +1,30 @@
+﻿@model Schedule
+@{
+    Layout = "_Layout";
+}
+
+<div class="divForEdit">
+    <form class="FormForSchedule" asp-controller="Schedule" asp-action="Add" method="post">
+        <a type="button" asp-controller="Class" asp-action="Information" asp-route-id="@Model.ClassId" class="close">X</a>
+        <h2>
+            Добавление занятия
+        </h2>
+        <ul class="properties">
+            <li>
+                <input hidden asp-for="ClassId" value="@Model.ClassId" />
+                <span>Выберите дату и время занятия*</span>
+                <input required asp-for="Date" placeholder="Дата занятия" asp-format="{0:yyyy-MM-ddTHH:mm:ss.fff}"/>
+                @Html.ValidationMessageFor(model => model.Date, null, new { style = "color:red" })
+            </li>            
+            <li>
+                <span>Выберите занятие*</span>
+                <select required asp-for="SubjectId" asp-items="ViewBag.AvailableSubjects"></select>
+                @Html.ValidationMessageFor(model => model.SubjectId, null, new { style = "color:red" })
+            </li>      
+        </ul>
+        <div class="button_place">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <button type="reset" class="btn btn-danger">Очистить</button>
+        </div>
+    </form>
+</div>

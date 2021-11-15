@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Subject>
+@{
+    Layout = "_Layout";
+}
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Предмет</th>
+                <th class="text-center">Преподаватель</th>
+            </tr>
+        </thead>
+        <tbody id="editSubject">
+            @foreach (var subject in Model)
+            {
+                <tr class="rowEditStart">
+                    <th class="text-center editId">@subject.Id</th>
+                    <td class="text-center">@subject.Name</td>
+                    <td class="text-center">@subject.Worker.LastName @subject.Worker.FirstName @subject.Worker.MiddleName</td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

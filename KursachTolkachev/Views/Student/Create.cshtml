@@ -5,31 +5,30 @@
 }
 
 <div class="divForEdit">
-    <form class="FormForEdit" asp-controller="Student" asp-action="Edit" method="post">
+    <form class="FormForEdit" asp-controller="Student" asp-action="Create" method="post">
         <a type="button" asp-controller="Student" asp-action="List" class="close">X</a>
         <h2>
-            Редактирование 
+            Добавление ученика 
         </h2>
         <ul class="properties">
             <li>
                 <span>Введите фамилию ученика*</span>
-                <input hidden asp-for="Id" type="text" value="@Model.Id" />
-                <input required asp-for="LastName" type="text" placeholder="Фамилия:" value="@Model.LastName" />
+                <input required asp-for="LastName" type="text" placeholder="Фамилия:"/>
                 @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
             </li>
             <li>
                 <span>Введите имя ученика*</span>
-                <input required asp-for="FirstName" type="text" placeholder="Имя:" value="@Model.FirstName" />
+                <input required asp-for="FirstName" type="text" placeholder="Имя:" />
                 @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
             </li>
             <li>
                 <span>Введите отчество ученика*</span>
-                <input required asp-for="MiddleName" type="text" placeholder="Отчество:" value="@Model.MiddleName" />
+                <input required asp-for="MiddleName" type="text" placeholder="Отчество:" />
                 @*<select required asp-for="AvailablePaymentId" asp-items="ViewBag.AvailablePayments"></select>*@
             </li>
             <li>
                 <span>Выберите класс*</span>
-                <select required asp-for="ClassId" asp-items="ViewBag.Classes" value="@Model.ClassId"></select>
+                <select required asp-for="ClassId" asp-items="ViewBag.Classes"></select>
             </li>            
             @*<li>
                 <span>Выберите права доступа к сайту*</span>
@@ -40,7 +39,6 @@
         <div class="button_place">
             <button type="submit" class="btn btn-success">Сохранить</button>
             <button type="reset" class="btn btn-danger">Очистить</button>
-            <a class="btn btn-danger" asp-controller="Student" asp-action="Delete" asp-route-id=@Model.Id><div>Удалить</div></a>
         </div>
     </form>
 </div>

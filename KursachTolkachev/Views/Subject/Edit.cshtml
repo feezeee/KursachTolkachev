@@ -1,0 +1,33 @@
+﻿@model Subject
+@{
+    Layout = "_Layout";
+
+}
+
+<div class="divForEdit">
+    <form class="FormForEdit" asp-controller="Subject" asp-action="Edit" method="post">
+        <a type="button" asp-controller="Subject" asp-action="List" class="close">X</a>
+        <h2>
+            Редактирование предмета
+        </h2>
+        <ul class="properties">
+            <li>
+                <input hidden asp-for="Id" type="text" value="@Model.Id" />
+                <span>Введите наименование предмета*</span>
+                <input required asp-for="Name" type="text" placeholder="Наименование:" value="@Model.Name" />
+            </li>
+            <li>
+                <span>Выберите преподавателя*</span>
+                <select required asp-for="WorkerId" value="@Model.WorkerId" asp-items="@ViewBag.Workers"></select>
+            </li>            
+        </ul>
+        <div class="button_place">
+            <button type="submit" class="btn btn-success">Сохранить</button>
+            <button type="reset" class="btn btn-danger">Очистить</button>
+            @if (Model.Schedules.Count == 0)
+            {
+                <a class="btn btn-danger" asp-controller="Subject" asp-action="Delete" asp-route-id=@Model.Id><div>Удалить</div></a>
+            }
+        </div>
+    </form>
+</div>
