@@ -67,7 +67,7 @@ namespace KursachTolkachev.Controllers
             var claims = new List<Claim>
             {                
                 new Claim(ClaimsIdentity.DefaultNameClaimType, worker.Id.ToString()),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, worker?.Position?.Name)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, worker?.AccessRight?.Name)
             };
             // создаем объект ClaimsIdentity
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType,
